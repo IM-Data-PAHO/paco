@@ -9,5 +9,9 @@ Description: More about what it does (maybe more than one line)
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
-Imports: Rcpp (>= 1.0.12)
+Imports: 
+    dplyr,
+    janitor,
+    Rcpp (>= 1.0.12)
 LinkingTo: Rcpp
+RoxygenNote: 7.3.2
