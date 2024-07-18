@@ -1,11 +1,11 @@
 Package: paco
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
+Title: A coverage calculator for PAHO
+Version: 0.0.1
 Author: PAHO CIM ISDATA
 Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: A coverage calculator for PAHO
+    PACO stands for PAho COverage calculator
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
