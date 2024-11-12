@@ -1,7 +1,7 @@
 Package: paco
 Type: Package
 Title: A coverage calculator for PAHO
-Version: 0.1.0
+Version: 0.1.1
 Author: PAHO CIM ISDATA
 Maintainer: The package maintainer <yourself@somewhere.net>
 Description: A coverage calculator for PAHO
