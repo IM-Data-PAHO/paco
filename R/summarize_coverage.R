@@ -46,9 +46,7 @@ summarize_coverage <- function(df, ..., show_N = FALSE) {
     # filter out rows with no coverage or population data
     dplyr::filter(!(is.na(COVERAGE) | is.na(VALUE))) %>% 
     # limit the coverage to 100
-    dplyr::mutate(LIMIT_COVERAGE = min(COVERAGE, 100)) %>% 
-    # round both coverage and population
-    dplyr::mutate(dplyr::across(c(LIMIT_COVERAGE, VALUE), ~ janitor::round_half_up(.)))
+    dplyr::mutate(LIMIT_COVERAGE = min(COVERAGE, 100))
   
   # group accordingly
   result <- result %>% group_by(YEAR, COVERAGE_CODE, ...)
@@ -63,8 +61,8 @@ summarize_coverage <- function(df, ..., show_N = FALSE) {
     dplyr::mutate(WEIGHTED_COVERAGE = WEIGHTED_VALUE * LIMIT_COVERAGE) %>% 
     # get coverage for the group
     dplyr::summarise(
-      COVERAGE = round(sum(WEIGHTED_COVERAGE), 2),
-      VALUE = sum(VALUE),
+      COVERAGE = janitor::round_half_up( sum(WEIGHTED_COVERAGE) ),
+      VALUE = janitor::round_half_up( sum(VALUE) ),
       # show N conditionally (for backwards compatibility)
       # N is the number of countries in the group
       N = if(show_N) { n() } else {}
