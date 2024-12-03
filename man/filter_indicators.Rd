@@ -7,12 +7,12 @@
 filter_indicators(table, indicators, years = NULL)
 }
 \arguments{
-\item{table}{A data frame containing the data to filter. It must include columns `INDCODE`, `YEAR`, `DIMENSION2`, 
-`COUNTRY`, and `VALUE`.}
+\item{table}{A data frame containing the data to filter. 
+It must include columns \code{INDCODE}, \code{YEAR}, \code{DIMENSION2}, \code{COUNTRY}, and \code{VALUE}.}
 
-\item{indicators}{A character vector specifying the indicator codes (`INDCODE`) to filter by.}
+\item{indicators}{A character vector specifying the indicator codes (\code{INDCODE}) to filter by.}
 
-\item{years}{Optional. A numeric vector specifying the years (`YEAR`) to filter by.}
+\item{years}{Optional. A numeric vector specifying the years (\code{YEAR}) to filter by.}
 }
 \description{
 This function filters a data table for a specific set of indicators and years, creates a composite indicator code, 

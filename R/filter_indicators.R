@@ -3,10 +3,10 @@
 #' This function filters a data table for a specific set of indicators and years, creates a composite indicator code, 
 #' and selects relevant columns for output.
 #'
-#' @param table A data frame containing the data to filter. It must include columns `INDCODE`, `YEAR`, `DIMENSION2`, 
-#' `COUNTRY`, and `VALUE`.
-#' @param indicators A character vector specifying the indicator codes (`INDCODE`) to filter by.
-#' @param years Optional. A numeric vector specifying the years (`YEAR`) to filter by.
+#' @param table A data frame containing the data to filter. 
+#' It must include columns \code{INDCODE}, \code{YEAR}, \code{DIMENSION2}, \code{COUNTRY}, and \code{VALUE}.
+#' @param indicators A character vector specifying the indicator codes (\code{INDCODE}) to filter by.
+#' @param years Optional. A numeric vector specifying the years (\code{YEAR}) to filter by.
 #' 
 #' @import dplyr
 #'
