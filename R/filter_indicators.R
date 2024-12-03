@@ -6,17 +6,23 @@
 #' @param table A data frame containing the data to filter. It must include columns `INDCODE`, `YEAR`, `DIMENSION2`, 
 #' `COUNTRY`, and `VALUE`.
 #' @param indicators A character vector specifying the indicator codes (`INDCODE`) to filter by.
-#' @param years A numeric vector specifying the years (`YEAR`) to filter by.
+#' @param years Optional. A numeric vector specifying the years (`YEAR`) to filter by.
 #' 
 #' @import dplyr
 #'
 #' @export
-filter_indicators <- function(table, indicators, years) {
+filter_indicators <- function(table, indicators, years = NULL) {
+  
+  # filter table
+  filtered_table <- table %>% 
+    filter(INDCODE %in% indicators)
+  
+  if(!is.null(years)) {
+    filtered_table <- filtered_table %>% filter(YEAR %in% years)
+  }
   
   # produce table
-  result <- table %>% 
-    # filter according to parameters
-    filter(INDCODE %in% indicators, YEAR %in% years) %>% 
+  result <- filtered_table %>% 
     # produce COMPOSITE_INDCODE
     mutate(COMPOSITE_INDCODE = if_else(
       is.na(DIMENSION2) | DIMENSION2 == "", 

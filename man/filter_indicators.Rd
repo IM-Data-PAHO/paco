@@ -4,7 +4,7 @@
 \alias{filter_indicators}
 \title{Filter Indicators by Indicator Code and Year}
 \usage{
-filter_indicators(table, indicators, years)
+filter_indicators(table, indicators, years = NULL)
 }
 \arguments{
 \item{table}{A data frame containing the data to filter. It must include columns `INDCODE`, `YEAR`, `DIMENSION2`, 
@@ -12,7 +12,7 @@ filter_indicators(table, indicators, years)
 
 \item{indicators}{A character vector specifying the indicator codes (`INDCODE`) to filter by.}
 
-\item{years}{A numeric vector specifying the years (`YEAR`) to filter by.}
+\item{years}{Optional. A numeric vector specifying the years (`YEAR`) to filter by.}
 }
 \description{
 This function filters a data table for a specific set of indicators and years, creates a composite indicator code, 
