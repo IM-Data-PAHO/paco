@@ -1,12 +1,12 @@
 Package: paco
 Type: Package
-Title: A coverage calculator for PAHO
-Version: 0.2.0
-Author: PAHO CIM ISDATA
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: A coverage calculator for PAHO
-    PACO stands for PAho COverage calculator
-License: What license is it under?
+Title: Utility functions for the immunization data team at PAHO/CIM.
+Version: 0.3.0
+Author: PAHO/CIM Immunizations Data Team
+Maintainer: PAHO/CIM Immunizations Data Team <immunization@paho.org>
+Description: Utility functions for the immunization data team at PAHO/CIM.
+    PACO stands for (PA)HO (CO)mpute.
+License: PAHO/CIM Open Source License
 Encoding: UTF-8
 LazyData: true
 Imports: 
