@@ -4,7 +4,16 @@
 \alias{fetch_from_WIISE}
 \title{Fetch a Table from a public WIISEMart endpoint}
 \usage{
-fetch_from_WIISE(api, table_name, min_year = NULL, max_year = NULL)
+fetch_from_WIISE(
+  api,
+  table_name,
+  min_year = NULL,
+  max_year = NULL,
+  country_col = "COUNTRY",
+  countries = NULL,
+  indcode_col = "INDCODE",
+  indcodes = NULL
+)
 }
 \arguments{
 \item{api}{A character string specifying the base URL of the API endpoint.}
@@ -14,6 +23,14 @@ fetch_from_WIISE(api, table_name, min_year = NULL, max_year = NULL)
 \item{min_year}{A numeric value specifying the minimum year of the data to fetch.}
 
 \item{max_year}{A numeric value specifying the maximum year of the data to fetch.}
+
+\item{country_col}{A character string specifying the column name for country filtering. Default is "COUNTRY".}
+
+\item{countries}{A character vector of country codes to filter by.}
+
+\item{indcode_col}{A character string specifying the column name for indicator code filtering. Default is "INDCODE".}
+
+\item{indcodes}{A character vector of indicator codes to filter by.}
 }
 \value{
 A data frame containing the data from the specified table.
