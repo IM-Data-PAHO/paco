@@ -2,15 +2,15 @@
 % Please edit documentation in R/init.R
 \name{init}
 \alias{init}
-\title{Initialize a new RStudio project with a particular directory structure.}
+\title{Create a directory structure according to PAHO/CIM standards.}
 \usage{
-init(project_name, path = ".")
+init(project_name = "Insert project name here", path = ".")
 }
 \arguments{
-\item{project_name}{The name of the project (used in the README.txt and .Rproj file)}
+\item{project_name}{The name of the project (used in the README.txt file). Defaults to "Insert project name here".}
 
-\item{path}{The path where the project directory should be created}
+\item{path}{The path where the project directory should be created. Defaults to current working directory.}
 }
 \description{
-Initialize a new RStudio project with a particular directory structure.
+Create a directory structure according to PAHO/CIM standards.
 }
