@@ -9,32 +9,38 @@ fetch_from_WIISE(
   table_name,
   min_year = NULL,
   max_year = NULL,
-  country_col = "COUNTRY",
-  countries = NULL,
-  indcode_col = "INDCODE",
-  indcodes = NULL
+  filters = list()
 )
 }
 \arguments{
-\item{api}{A character string specifying the base URL of the API endpoint.}
+\item{api}{Character. A string specifying the base URL of the API endpoint.}
 
-\item{table_name}{A character string specifying the name of the table to fetch from the API.}
+\item{table_name}{Character. A string specifying the name of the table to fetch from the API.}
 
-\item{min_year}{A numeric value specifying the minimum year of the data to fetch.}
+\item{min_year}{Numeric (optional). A value specifying the minimum year of the data to fetch.}
 
-\item{max_year}{A numeric value specifying the maximum year of the data to fetch.}
+\item{max_year}{Numeric (optional). A value specifying the maximum year of the data to fetch.}
 
-\item{country_col}{A character string specifying the column name for country filtering. Default is "COUNTRY".}
-
-\item{countries}{A character vector of country codes to filter by.}
-
-\item{indcode_col}{A character string specifying the column name for indicator code filtering. Default is "INDCODE".}
-
-\item{indcodes}{A character vector of indicator codes to filter by.}
+\item{filters}{List (optional). A named list where each name is an additional column to filter by and each value is a character vector of values to include.}
 }
 \value{
 A data frame containing the data from the specified table.
 }
 \description{
 This function retrieves a specified table from WIISE and returns it as a data frame.
+}
+\examples{
+\dontrun{
+fetch_from_WIISE(
+  api = "the_API_link",
+  table_name = "your_table_name",
+  min_year = 2022,
+  max_year = 2023,
+  filters = list(
+    COUNTRY = c("COUNTRY_1", "COUNTRY_2"),
+    INDICATOR = c("INDICATOR_1", "INDICATOR_2")
+  )
+)
+}
+
 }

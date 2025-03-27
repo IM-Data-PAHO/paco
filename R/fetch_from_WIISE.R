@@ -2,24 +2,33 @@
 #'
 #' This function retrieves a specified table from WIISE and returns it as a data frame.
 #'
-#' @param api A character string specifying the base URL of the API endpoint.
-#' @param table_name A character string specifying the name of the table to fetch from the API.
-#' @param min_year A numeric value specifying the minimum year of the data to fetch.
-#' @param max_year A numeric value specifying the maximum year of the data to fetch.
-#' @param country_col A character string specifying the column name for country filtering. Default is "COUNTRY".
-#' @param countries A character vector of country codes to filter by.
-#' @param indcode_col A character string specifying the column name for indicator code filtering. Default is "INDCODE".
-#' @param indcodes A character vector of indicator codes to filter by.
+#' @param api Character. A string specifying the base URL of the API endpoint.
+#' @param table_name Character. A string specifying the name of the table to fetch from the API.
+#' @param min_year Numeric (optional). A value specifying the minimum year of the data to fetch.
+#' @param max_year Numeric (optional). A value specifying the maximum year of the data to fetch.
+#' @param filters List (optional). A named list where each name is an additional column to filter by and each value is a character vector of values to include.
 #'
 #' @return A data frame containing the data from the specified table.
+#' 
+#' @examples
+#' \dontrun{
+#' fetch_from_WIISE(
+#'   api = "the_API_link",
+#'   table_name = "your_table_name",
+#'   min_year = 2022,
+#'   max_year = 2023,
+#'   filters = list(
+#'     COUNTRY = c("COUNTRY_1", "COUNTRY_2"),
+#'     INDICATOR = c("INDICATOR_1", "INDICATOR_2")
+#'   )
+#' )
+#' }
 #' 
 #' @import rio
 #' @import utils
 #' 
 #' @export
-fetch_from_WIISE <- function(api, table_name, min_year = NULL, max_year = NULL, 
-                             country_col = "COUNTRY", countries = NULL, 
-                             indcode_col = "INDCODE", indcodes = NULL) {
+fetch_from_WIISE <- function(api, table_name, min_year = NULL, max_year = NULL, filters = list()) {
   
   # construct base URL
   base_url <- paste0(api, "/WIISE/", table_name) 
@@ -27,6 +36,7 @@ fetch_from_WIISE <- function(api, table_name, min_year = NULL, max_year = NULL,
   # construct filter conditions
   filter_conditions <- c()
   
+  # add year filters
   if (!is.null(min_year)) {
     filter_conditions <- c(filter_conditions, paste0("YEAR%20ge%20", min_year))
   }
@@ -35,14 +45,16 @@ fetch_from_WIISE <- function(api, table_name, min_year = NULL, max_year = NULL,
     filter_conditions <- c(filter_conditions, paste0("YEAR%20le%20", max_year))
   }
   
-  if (!is.null(countries) && length(countries) > 0) {
-    country_filter <- paste(sprintf("%%27%s%%27", countries), collapse = ",")
-    filter_conditions <- c(filter_conditions, paste0(country_col, "%20in%20(", country_filter, ")"))
-  }
-  
-  if (!is.null(indcodes) && length(indcodes) > 0) {
-    indcode_filter <- paste(sprintf("%%27%s%%27", indcodes), collapse = ",")
-    filter_conditions <- c(filter_conditions, paste0(indcode_col, "%20in%20(", indcode_filter, ")"))
+  # add conditions from filters list
+  if (length(filters) > 0) {
+    for (col in names(filters)) {
+      values <- filters[[col]]
+      if (length(values) > 0) {
+        encoded_values <- paste(sprintf("%%27%s%%27", values), collapse = ",")
+        condition <- paste0(col, "%20in%20(", encoded_values, ")")
+        filter_conditions <- c(filter_conditions, condition)
+      }
+    }
   }
   
   # combine filter conditions with ' and '
