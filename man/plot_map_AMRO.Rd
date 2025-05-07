@@ -9,10 +9,12 @@ plot_map_AMRO(
   data,
   iso_col,
   fill_col,
+  region_col = "REGION_CODE",
   fill_levels = NULL,
   fill_labels = NULL,
   legend_title = "Value",
-  palette = "PuBuGn"
+  palette = "PuBuGn",
+  add_zoom = TRUE
 )
 }
 \arguments{
@@ -24,6 +26,8 @@ plot_map_AMRO(
 
 \item{fill_col}{Character. Name of the column with the data to use as fill.}
 
+\item{region_col}{Character. Name of the column with the subregion codes for AMRO, must be present in \code{shp} or \code{data}. Default is \code{REGION_CODE}.}
+
 \item{fill_levels}{Character vector. Optional levels for the factor of \code{fill_col}.}
 
 \item{fill_labels}{Character vector. Optional labels for factor levels of \code{fill_col}.}
@@ -31,6 +35,8 @@ plot_map_AMRO(
 \item{legend_title}{Character. Title for the legend. Default is "Value".}
 
 \item{palette}{Character. Color palette to use in \code{scale_fill_brewer()}. Default is "PuBuGn".}
+
+\item{add_zoom}{Logical. Whether to add the zoomed inset for the Caribbean. Default is \code{TRUE}.}
 }
 \value{
 A \code{ggplot} object.
