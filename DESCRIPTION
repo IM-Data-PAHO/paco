@@ -1,7 +1,7 @@
 Package: paco
 Type: Package
 Title: Utility functions for the immunization data team at PAHO/CIM.
-Version: 0.4.1
+Version: 0.5.0
 Author: PAHO/CIM Immunizations Data Team
 Maintainer: PAHO/CIM Immunizations Data Team <immunization@paho.org>
 Description: Utility functions for the immunization data team at PAHO/CIM.
