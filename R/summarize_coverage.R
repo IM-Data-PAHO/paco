@@ -11,9 +11,8 @@
 #' @details
 #' The function performs the following steps:
 #' \itemize{
-#'   \item Groups the data by \code{ISO_CODE}, \code{YEAR}, and \code{COVERAGE_CODE}.
 #'   \item Filters out rows with missing \code{COVERAGE} or \code{VALUE}.
-#'   \item Limits the \code{COVERAGE} to 100.
+#'   \item Limits the \code{COVERAGE} to 100 for each row.
 #'   \item Rounds the \code{COVERAGE} and \code{VALUE} columns.
 #'   \item Optionally groups the data by additional columns provided in \code{...}.
 #'   \item Calculates the total population for each group.
@@ -41,8 +40,7 @@
 summarize_coverage <- function(df, ..., show_N = FALSE) {
   # prepare the data frame
   result <- df %>% 
-    # group for each country, year and vaccine
-    dplyr::group_by(ISO_CODE, YEAR, COVERAGE_CODE) %>% 
+    rowwise() %>% 
     # filter out rows with no coverage or population data
     dplyr::filter(!(is.na(COVERAGE) | is.na(VALUE))) %>% 
     # limit the coverage to 100
