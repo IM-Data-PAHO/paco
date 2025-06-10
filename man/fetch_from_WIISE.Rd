@@ -9,7 +9,8 @@ fetch_from_WIISE(
   table_name,
   min_year = NULL,
   max_year = NULL,
-  filters = list()
+  filters = list(),
+  method = "get"
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ fetch_from_WIISE(
 \item{max_year}{Numeric (optional). A value specifying the maximum year of the data to fetch.}
 
 \item{filters}{List (optional). A named list where each name is an additional column to filter by and each value is a character vector of values to include.}
+
+\item{method}{Character (optional). Either "get" or "post". Defaults to "get" and automatically changes to "post" if URL size surpasses 2048 characters.}
 }
 \value{
 A data frame containing the data from the specified table.
@@ -39,7 +42,8 @@ fetch_from_WIISE(
   filters = list(
     COUNTRY = c("COUNTRY_1", "COUNTRY_2"),
     INDICATOR = c("INDICATOR_1", "INDICATOR_2")
-  )
+  ),
+  method = "get"
 )
 }
 
