@@ -4,17 +4,19 @@
 \alias{summarize_coverage}
 \title{Summarize Coverage}
 \usage{
-summarize_coverage(df, ..., show_N = FALSE)
+summarize_coverage(df, ..., show_N = FALSE, round_to = 0)
 }
 \arguments{
-\item{df}{A data frame containing the columns \code{ISO_CODE}, \code{YEAR}, \code{COVERAGE_CODE}, \code{COVERAGE}, and \code{VALUE}.}
+\item{df}{A data frame containing the columns \code{ISO_CODE}, \code{YEAR}, \code{COVERAGE_CODE}, \code{COVERAGE} and \code{VALUE} (the population).}
 
 \item{...}{Additional grouping variables (unquoted) to group by.}
 
-\item{show_N}{A logical value indicating whether to include the number of countries in each group in the result. Defaults to \code{FALSE}.}
+\item{show_N}{Logical (optional). A logical value indicating whether to include the number of countries in each group in the result. Defaults to \code{FALSE}.}
+
+\item{round_to}{Numeric (optional). Number of digits for rounding of the final \code{COVERAGE} and \code{VALUE} columns.}
 }
 \value{
-A data frame with the calculated coverage for each group, including the total population for the group, and optionally the number of countries.
+A data frame with the calculated \code{COVERAGE} for each group, including the total population (\code{VALUE}) for the group, and optionally the number of countries (\code{N}).
 }
 \description{
 This function calculates the weighted coverage for a set of countries, using the population as the weights.
@@ -24,11 +26,11 @@ The function performs the following steps:
 \itemize{
   \item Filters out rows with missing \code{COVERAGE} or \code{VALUE}.
   \item Limits the \code{COVERAGE} to 100 for each row.
-  \item Rounds the \code{COVERAGE} and \code{VALUE} columns.
   \item Optionally groups the data by additional columns provided in \code{...}.
   \item Calculates the total population for each group.
   \item Calculates the weighted coverage for each group.
   \item Summarizes the data to get the final coverage and population for each group.
+  \item Rounds to \code{round_to} digits using \code{janitor::round_half_up}.
   \item Optionally includes the number of countries in each group if \code{show_N} is \code{TRUE}.
 }
 }

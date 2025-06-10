@@ -2,22 +2,23 @@
 #'
 #' This function calculates the weighted coverage for a set of countries, using the population as the weights.
 #'
-#' @param df A data frame containing the columns \code{ISO_CODE}, \code{YEAR}, \code{COVERAGE_CODE}, \code{COVERAGE}, and \code{VALUE}.
+#' @param df A data frame containing the columns \code{ISO_CODE}, \code{YEAR}, \code{COVERAGE_CODE}, \code{COVERAGE} and \code{VALUE} (the population).
 #' @param ... Additional grouping variables (unquoted) to group by.
-#' @param show_N A logical value indicating whether to include the number of countries in each group in the result. Defaults to \code{FALSE}.
+#' @param show_N Logical (optional). A logical value indicating whether to include the number of countries in each group in the result. Defaults to \code{FALSE}.
+#' @param round_to Numeric (optional). Number of digits for rounding of the final \code{COVERAGE} and \code{VALUE} columns.
 #'
-#' @return A data frame with the calculated coverage for each group, including the total population for the group, and optionally the number of countries.
+#' @return A data frame with the calculated \code{COVERAGE} for each group, including the total population (\code{VALUE}) for the group, and optionally the number of countries (\code{N}).
 #'
 #' @details
 #' The function performs the following steps:
 #' \itemize{
 #'   \item Filters out rows with missing \code{COVERAGE} or \code{VALUE}.
 #'   \item Limits the \code{COVERAGE} to 100 for each row.
-#'   \item Rounds the \code{COVERAGE} and \code{VALUE} columns.
 #'   \item Optionally groups the data by additional columns provided in \code{...}.
 #'   \item Calculates the total population for each group.
 #'   \item Calculates the weighted coverage for each group.
 #'   \item Summarizes the data to get the final coverage and population for each group.
+#'   \item Rounds to \code{round_to} digits using \code{janitor::round_half_up}.
 #'   \item Optionally includes the number of countries in each group if \code{show_N} is \code{TRUE}.
 #' }
 #'
@@ -37,7 +38,7 @@
 #' @import dplyr
 #' @import janitor
 #' @export
-summarize_coverage <- function(df, ..., show_N = FALSE) {
+summarize_coverage <- function(df, ..., show_N = FALSE, round_to = 0) {
   # prepare the data frame
   result <- df %>% 
     rowwise() %>% 
@@ -59,8 +60,8 @@ summarize_coverage <- function(df, ..., show_N = FALSE) {
     dplyr::mutate(WEIGHTED_COVERAGE = WEIGHTED_VALUE * LIMIT_COVERAGE) %>% 
     # get coverage for the group
     dplyr::summarise(
-      COVERAGE = janitor::round_half_up( sum(WEIGHTED_COVERAGE) ),
-      VALUE = janitor::round_half_up( sum(VALUE) ),
+      COVERAGE = janitor::round_half_up( sum(WEIGHTED_COVERAGE), round_to ),
+      VALUE = janitor::round_half_up( sum(VALUE), round_to ),
       # show N conditionally (for backwards compatibility)
       # N is the number of countries in the group
       N = if(show_N) { n() } else {}
