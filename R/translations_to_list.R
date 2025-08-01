@@ -15,9 +15,10 @@
 #' @import dplyr
 #' @export
 translations_to_list <- function(data, language, id_module = "id_module", id_section = "id_section", id_element = "id_element") {
+  
   # Select the IDs and the language column.
-  df_to_translate <- data %>% 
-    select(id_module, id_section, id_element, language)
+  cols_to_select <- c(id_module, id_section, id_element, language)
+  df_to_translate <- data %>% select(all_of(cols_to_select))
   
   # Create an empty list that will contain all other sublists.
   list_module <- list()
