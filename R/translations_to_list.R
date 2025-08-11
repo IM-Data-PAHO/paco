@@ -18,7 +18,21 @@ translations_to_list <- function(data, language, id_module = "id_module", id_sec
   
   # Select the IDs and the language column.
   cols_to_select <- c(id_module, id_section, id_element, language)
-  df_to_translate <- data %>% select(all_of(cols_to_select))
+  df_to_translate <- data %>%
+    select(all_of(cols_to_select)) %>% 
+    # standardize column names
+    rename(
+      id_module = !!id_module,
+      id_section = !!id_section,
+      id_element = !!id_element
+    )
+  
+  # Set standard names
+  # NOTE: Need to reset the names so the loop below addresses the columns
+  #       correctly.
+  id_module <- "id_module"
+  id_section <- "id_section"
+  id_element <- "id_element"
   
   # Create an empty list that will contain all other sublists.
   list_module <- list()
