@@ -4,12 +4,14 @@
 \alias{init}
 \title{Create a directory structure according to PAHO/CIM standards.}
 \usage{
-init(project_name = "Insert project name here", path = ".")
+init(project_name = "Insert project name here", path = ".", rproj = FALSE)
 }
 \arguments{
 \item{project_name}{The name of the project (used in the README.txt file). Defaults to "Insert project name here".}
 
 \item{path}{The path where the project directory should be created. Defaults to current working directory.}
+
+\item{rproj}{Whether to create a \code{project_name.Rproj} file. Default is \code{FALSE}. When in use, requires an explicit \code{project_name}.}
 }
 \description{
 Create a directory structure according to PAHO/CIM standards.

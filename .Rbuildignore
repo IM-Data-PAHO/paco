@@ -1,4 +1,4 @@
 ^renv$
 ^renv\.lock$
-^.*\.Rproj$
+^paco\.Rproj$
 ^\.Rproj\.user$
