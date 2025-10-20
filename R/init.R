@@ -1,6 +1,6 @@
 #' Create a directory structure according to PAHO/CIM standards.
 #'
-#' @param project_name The name of the project (used in the README.txt file). Defaults to "Insert project name here".
+#' @param project_name The name of the project (used in the \code{README.txt} and \code{project_name.Rproj} files). Defaults to "Insert project name here".
 #' @param path The path where the project directory should be created. Defaults to current working directory.
 #' @param rproj Whether to create a \code{project_name.Rproj} file. Default is \code{FALSE}. When in use, requires an explicit \code{project_name}.
 #' @return NULL

@@ -7,7 +7,7 @@
 init(project_name = "Insert project name here", path = ".", rproj = FALSE)
 }
 \arguments{
-\item{project_name}{The name of the project (used in the README.txt file). Defaults to "Insert project name here".}
+\item{project_name}{The name of the project (used in the \code{README.txt} and \code{project_name.Rproj} files). Defaults to "Insert project name here".}
 
 \item{path}{The path where the project directory should be created. Defaults to current working directory.}
 
