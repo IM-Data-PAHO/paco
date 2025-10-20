@@ -66,7 +66,12 @@ plot_map_AMRO <- function(shp,
   
   # Define coordinate limits only if zoom is enabled
   my_coord_sf <- if (add_zoom) {
-    coord_sf(xlim = c(-19000000, 10000000), crs = st_crs(3857), expand = FALSE)
+    coord_sf(
+      xlim = c(-19000000, 12000000),   # fixed to AMRO
+      ylim = c(-8400000, 20000000),    # fixed to AMRO
+      crs  = st_crs(3857),
+      expand = FALSE
+    )
   } else {
     coord_sf(crs = st_crs(3857), expand = FALSE)
   }
